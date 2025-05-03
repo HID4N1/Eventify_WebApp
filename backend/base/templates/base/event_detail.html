@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1>Event Detail</h1>
+    <div class="event-detail-container">
+        <div class="event-main-image">
+            {% if event.main_image and event.main_image.url %}
+                <img src="{{ event.main_image.url }}" alt="{{ event.title }}">
+            {% else %}
+                <img src="{% static 'base/images/default_main_image.jpg' %}" alt="{{ event.title }}">
+            {% endif %}
+        </div>
+        <div class="event-info">
+            <h2>{{ event.title }}</h2>
+            <p><strong>Date:</strong> {{ event.date }}</p>
+            <p><strong>Location:</strong> {{ event.location }}</p>
+            <p><strong>Description:</strong> {{ event.description }}</p>
+            <p><strong>Categories:</strong>
+                {% for category in categories %}
+                    {{ category.name }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    No categories
+                {% endfor %}
+            </p>
+            <p><strong>Customers:</strong></p>
+            <ul>
+                {% for customer in customers %}
+                    <li>{{ customer.name }} ({{ customer.email }})</li>
+                {% empty %}
+                    <li>No customers registered</li>
+                {% endfor %}
+            </ul>
+            <p><strong>Created At:</strong> {{ event.created_at }}</p>
+            <p><strong>Updated At:</strong> {{ event.updated_at }}</p>
+
+        <!-- actions button -->
+            <div class="event-actions">
+                <a href="{% url 'update-event' event.id %}" class="btn btn-primary">Edit Event</a>
+                <a href="{% url 'delete-event' event.id %}" class="btn btn-danger">Delete Event</a>
+            </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+   
+<h1>Events</h1>
+
+<div class="create-event-btn">
+    <a href="{% url 'create-event' %}" class="btn">Create New Event</a>
+</div>
+
+<form method="GET" action="{% url 'event' %}" id="filterForm">
+    <!-- events search bar -->
+    <div class="search-bar">
+        <input type="text" name="search" placeholder="Search for events..." value="{{ search_query }}">
+        <button type="submit" >
+            <i class="bi bi-search"></i>
+        </button>
+    </div>
+
+    <!-- events filter -->
+    <div class="filter">
+        <label for="category">Category:</label>
+        <select id="category" name="category" onchange="this.form.submit()">
+            <option value="all" {% if category_filter == 'all' %}selected{% endif %}>All</option>
+            {% for category in categories %}
+                <option value="{{ category.name|lower }}" {% if category_filter == category.name|lower %}selected{% endif %}>{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" value="{{ date_filter }}" onchange="this.form.submit()">
+    </div>
+    <div style="text-align: center; margin-top: 1rem;">
+        <button type="button" id="clearFiltersBtn" style="padding: 0.5rem 1rem;">Clear Filters</button>
+    </div>
+</form>
+
+<div class="event-cards-container">
+    {% for i in events %}
+        {% include 'base/event_card.html' %}
+    {% empty %}
+        <p>No events found matching your criteria.</p>
+    {% endfor %}
+</div>
+
+<script>
+document.getElementById('clearFiltersBtn').addEventListener('click', function() {
+    const form = document.getElementById('filterForm');
+    form.search.value = '';
+    form.category.value = 'all';
+    form.date.value = '';
+    form.submit();
+});
+</script>
+
+{% endblock %}

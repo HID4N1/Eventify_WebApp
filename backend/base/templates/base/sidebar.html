@@ -1,0 +1,73 @@
+{% load static %}
+
+<body>
+    <!-- sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            Eventify
+        </div>
+        <ul>
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'event' %}">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Events</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'calendar' %}">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>Calendar</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'finance' %}">
+                    <i class="fas fa-wallet"></i>
+                    <span>Finance</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'support' %}">
+                    <i class="fas fa-headset"></i>
+                    <span>Support</span>
+                </a>
+            </li>
+            <br>
+            <hr style="width: 180px; margin: 0 auto; border: 1px solid #ccc;">
+            <br>
+            <li>
+                <a href="">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+             <li>
+                <a href="">
+                    <i class="bi bi-gear-wide"></i>
+                    <span>Settings</span>
+                </a>
+             </li>
+             <li>
+                <form method="POST" action="#" style="margin: 0;">
+                {% csrf_token %}
+                <button type="submit" style="all: unset; cursor: pointer; display: flex; align-items: center; width: 100%; padding: 0 10px; height: 40px; color: inherit;">
+                <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i>
+                <span>Logout</span>
+                </button>
+                </form>
+                </li>            
+            
+        </ul>
+
+    </div>
+    <!-- main content -->
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% load static %}
+<div class="event-card card">
+    <div class="card-header">
+        <h2>{{ i.title }}</h2>
+    </div>
+    <div class="card-body">
+        {% if i.main_image %}
+            <img src="{{ i.main_image.url }}" alt="{{ i.title }}" class="event-image">
+        {% else %}
+            <img src="{% static 'base/images/default_main_image.jpg' %}" alt="{{ i.title }}" class="event-image">
+        {% endif %}
+        <p class="card-info"><i class="fas fa-calendar-alt"></i> {{ i.date }}</p>
+        <p class="card-info"><i class="fas fa-map-marker-alt"></i> {{ i.location }}</p>
+        <a href="{% url 'event-detail' i.pk %}" class="fas fa-eye">View More</a>
+    </div>
+</div>

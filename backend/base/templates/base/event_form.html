@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Event Form - Eventify{% endblock %}
+
+{% block content %}
+<h1>{{ page_title }}</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="event-form-container">
+        {% for field in form %}
+            <label for="{{ field.id_for_label }}">
+                {{ field.label }}
+                {% if field.field.required %}
+                    <span class="required">*</span>
+                {% endif %}
+            </label>
+            {{ field }}
+            {% if field.errors %}
+                <span class="error-message">{{ field.errors|striptags }}</span>
+            {% endif %}
+        {% endfor %}
+
+        <div class="button-wrapper">
+            <button type="submit" name="submit">
+                {% if "Create" in page_title %}
+                    Create Event
+                {% else %}
+                    Update Event
+                {% endif %}
+            </button>
+        </div>
+    </div>
+</form>
+{% endblock %}

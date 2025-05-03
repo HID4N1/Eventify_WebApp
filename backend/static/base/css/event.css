@@ -1,0 +1,192 @@
+.search-bar, .filter {
+    background-color: gradient(135deg, #2a0a3a 0%, #3d1257 100%); 
+    padding: 1.5rem 2rem;
+    border-radius: 14px;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 10px 25px rgba(42, 10, 58, 0.4);
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #2a0a3a 0%, #3d1257 100%);
+    border: 1px solid #4a1d6e;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-bar:hover, .search-bar:focus-within {
+    box-shadow: 0 0 15px rgba(156, 77, 255, 0.7);
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 10px 0 0 10px;
+    background-color: rgba(245, 236, 224, 0.95);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #2a0a3a;
+    line-height: 1.4;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar input::placeholder {
+    color: #7a5dbf;
+    font-weight: 400;
+}
+
+.search-bar input:focus {
+    outline: none;
+    background-color: #F5ECE0;
+    box-shadow: 0 0 0 3px #9c4dff;
+}
+
+.search-bar button {
+    padding: 1rem 1.8rem;
+    background: linear-gradient(135deg, #7b2cbf 0%, #5a189a 100%);
+    color: #F5ECE0;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(123, 44, 191, 0.5);
+}
+
+.search-bar button:hover {
+    background: linear-gradient(135deg, #9c4dff 0%, #7b2cbf 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(156, 77, 255, 0.6);
+}
+
+.search-bar button i {
+    font-size: 1.3rem;
+}
+
+/* Filter section styling */
+.filter {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    border-radius: 14px;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 10px 25px rgba(42, 10, 58, 0.4);
+    background-color: rgba(245, 236, 224, 0.95);
+    background: linear-gradient(135deg, #3d1257 0%, #2a0a3a 100%);
+    border: 1px solid #4a1d6e;
+    transition: box-shadow 0.3s ease;
+}
+
+.filter:hover, .filter:focus-within {
+    box-shadow: 0 0 15px rgba(156, 77, 255, 0.7);
+}
+
+.filter label {
+    color: #F5ECE0;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    display: block;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.filter select, .filter input {
+    width: 80%;
+    padding: 0.9rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(245, 236, 224, 0.95);
+    color: #2a0a3a;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter select::placeholder, .filter input::placeholder {
+    color: #7a5dbf;
+    font-weight: 400;
+}
+
+.filter select:focus, .filter input:focus {
+    outline: none;
+    background-color: #F5ECE0;
+    box-shadow: 0 0 0 3px #9c4dff;
+}
+
+.filter button {
+    background: linear-gradient(135deg, #9c4dff 0%, #7b2cbf 100%);
+    color: #F5ECE0;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    transition: all 0.3s ease;
+    margin-top: 0.8rem;
+    box-shadow: 0 6px 16px rgba(156, 77, 255, 0.5);
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+.filter button:hover {
+    background: linear-gradient(135deg, #b56aff 0%, #9c4dff 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(156, 77, 255, 0.6);
+}
+
+/* Futuristic glowing effect on focus */
+.search-bar:focus-within, .filter:focus-within {
+    box-shadow: 0 0 20px rgba(156, 77, 255, 0.7);
+}
+
+/* creat new event link */
+.create-event-btn{
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #9c4dff 0%, #7b2cbf 100%);
+    color: #F5ECE0;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    text-decoration: none;
+    letter-spacing: 1.2px;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 6px 16px rgba(156, 77, 255, 0.5);
+}
+.create-event-btn:hover {
+    background-color: linear-gradient(135deg, #b56aff 0%, #9c4dff 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(156, 77, 255, 0.6);
+}
+
+/* Clear filters button styling */
+#clearFiltersBtn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    box-shadow: 0 6px 16px rgba(255, 71, 87, 0.5);
+    margin-top: 0.8rem;
+}
+
+#clearFiltersBtn:hover {
+    background: linear-gradient(135deg, #ff8787 0%, #ff6b6b 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 71, 87, 0.6);
+}
