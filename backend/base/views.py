@@ -88,10 +88,10 @@ def create_event(request):
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
-            # Assign default organizer user to avoid NOT NULL constraint error
+            # Assign default organizer to avoid NOT NULL constraint error
             try:
-                default_organizer = User.objects.first()
-            except User.DoesNotExist:
+                default_organizer = Organiser.objects.first()
+            except Organiser.DoesNotExist:
                 default_organizer = None
             event.organizer = default_organizer
             event.save()

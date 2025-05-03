@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 
-class User(models.Model):
-    """User model for event organizers"""
+
+class Organiser(models.Model):
+    """Organiser model for event organizers"""
     username = models.CharField(max_length=150, unique=True)
     password = models.CharField(max_length=128)
     email = models.EmailField(unique=True)
@@ -12,7 +12,7 @@ class User(models.Model):
     
     def __str__(self):
         return self.username
-    
+
 
 class Category(models.Model):
     """Event categories"""
@@ -29,7 +29,7 @@ class Event(models.Model):
         ('cancelled', 'Cancelled'),
     ]
     
-    organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='events', null=True, blank=True)
+    organizer = models.ForeignKey(Organiser, on_delete=models.CASCADE, related_name='events', null=True, blank=True)
     title = models.CharField(max_length=200)
     description = models.TextField()
     date = models.DateTimeField()
