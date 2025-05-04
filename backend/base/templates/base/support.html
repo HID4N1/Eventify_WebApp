@@ -1,17 +1,195 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-<html>
-<body>
-    {%block content%}
 
-       
-    <h1>info dyal support</h1>
-    <h1>Ai chatbot</h1>
-
-
+{% block content %}
+<div class="support-container">
+    <!-- Support Header -->
+    <div class="support-header">
+        <h1><i class="fas fa-headset"></i> Eventify Support Center</h1>
+        <p>Find answers to common questions or contact our support team</p>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" placeholder="Search help articles..." class="search-input">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
     </div>
 
-    {%endblock%}
-</body>
-</html>
+    <!-- Main Content -->
+    <div class="support-content">
+        <!-- Help Categories -->
+        <section class="help-categories">
+            <h2>Help Categories</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Event Management</h3>
+                    <p>Learn how to create, manage, and promote your events</p>
+                    <a href="#" class="btn-link">View Articles <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <h3>Ticketing</h3>
+                    <p>Everything about ticket setup, sales, and attendee management</p>
+                    <a href="#" class="btn-link">View Articles <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics</h3>
+                    <p>Understand your event performance and insights</p>
+                    <a href="#" class="btn-link">View Articles <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Articles -->
+        <section class="popular-articles">
+            <h2>Popular Articles</h2>
+            <div class="articles-list">
+                <div class="article-card">
+                    <h3><a href="#">How to create your first event</a></h3>
+                    <p class="article-excerpt">Step-by-step guide to setting up your first event on Eventify</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 5 min read</span>
+                        <span><i class="far fa-thumbs-up"></i> 92% helpful</span>
+                    </div>
+                </div>
+                
+                <div class="article-card">
+                    <h3><a href="#">Managing ticket types and pricing</a></h3>
+                    <p class="article-excerpt">Learn how to create different ticket types and set pricing options</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 8 min read</span>
+                        <span><i class="far fa-thumbs-up"></i> 87% helpful</span>
+                    </div>
+                </div>
+                
+                <div class="article-card">
+                    <h3><a href="#">Integrating payment gateways</a></h3>
+                    <p class="article-excerpt">Connect Stripe, PayPal or other payment methods to your events</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 12 min read</span>
+                        <span><i class="far fa-thumbs-up"></i> 95% helpful</span>
+                    </div>
+                </div>
+                
+                <div class="article-card">
+                    <h3><a href="#">Exporting attendee data</a></h3>
+                    <p class="article-excerpt">How to download and analyze your event attendee information</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 4 min read</span>
+                        <span><i class="far fa-thumbs-up"></i> 82% helpful</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Chatbot Widget -->
+        <div class="chatbot-container">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <i class="fas fa-robot"></i>
+                    <h3>Eventify AI Assistant</h3>
+                </div>
+                <button class="chatbot-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chatbot-messages">
+                <div class="chatbot-welcome">
+                    <p>Hi there! I'm EventBot, your AI assistant. How can I help you today?</p>
+                    <div class="quick-questions">
+                        <button class="quick-question">How do I create an event?</button>
+                        <button class="quick-question">How to manage tickets?</button>
+                        <button class="quick-question">Troubleshooting issues</button>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" placeholder="Type your question here..." class="chatbot-message-input">
+                <button class="chatbot-send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button class="chatbot-toggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <!-- Contact Support -->
+        <section class="contact-support">
+            <div class="contact-card">
+                <div class="contact-info">
+                    <h2>Still need help?</h2>
+                    <p>Our support team is available 24/7 to assist you with any questions or issues.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email Us</h4>
+                                <p>support@eventify.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h4>Call Us</h4>
+                                <p>+1 (800) 555-0199</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <i class="fas fa-comment-dots"></i>
+                            <div>
+                                <h4>Live Chat</h4>
+                                <p>Available 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send us a message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" placeholder="Enter your name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject">
+                                <option value="">Select a subject</option>
+                                <option value="technical">Technical Issue</option>
+                                <option value="billing">Billing Question</option>
+                                <option value="feature">Feature Request</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" placeholder="Describe your issue or question"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

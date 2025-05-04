@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from .forms import EventForm, OrganiserRegistrationForm
 from .decorators import organizer_required
+
 from .models import *
 
 @organizer_required
@@ -14,8 +15,8 @@ def Dashboard(request):
     """View for the dashboard"""
     if not request.user.is_authenticated or not hasattr(request.user, 'username'):
         return redirect('login')  # Only organizers can access
-    events = Event.objects.all().select_related('organizer').prefetch_related('categories')
-    customers = Customer.objects.all()
+    events = Event.objects.filter(organizer=request.user).select_related('organizer').prefetch_related('categories')
+    customers = Customer.objects.filter(tickets__event__organizer=request.user).distinct()
     TotalCustomers = customers.count()
     TotalEvents = events.count()
     completed_events = events.filter(status='completed').count()
@@ -46,7 +47,7 @@ def event(request):
     category_filter = request.GET.get('category', 'all')
     date_filter = request.GET.get('date', '')
 
-    events = Event.objects.all().select_related('organizer').prefetch_related('categories')
+    events = Event.objects.filter(organizer=request.user).select_related('organizer').prefetch_related('categories')
 
     if search_query:
         events = events.filter(
@@ -72,7 +73,7 @@ def event(request):
 
 @organizer_required
 def event_detail(request, pk):
-    event = Event.objects.get(id=pk)
+    event = Event.objects.get(id=pk, organizer=request.user)
     customers = Customer.objects.filter(tickets__event=event).distinct()
     categories = event.categories.all()
     context = {
@@ -90,11 +91,7 @@ def create_event(request):
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
-            try:
-                default_organizer = Organiser.objects.first()
-            except Organiser.DoesNotExist:
-                default_organizer = None
-            event.organizer = default_organizer
+            event.organizer = request.user
             event.save()
             messages.success(request, 'Event created successfully!')
             return redirect('event')

@@ -5,9 +5,26 @@
     {%block content%}
 
        
-    <h1>calendar b js kola date dyal event atkon highlited </h1>
-
-
+    <div class="calendar">
+        <div class="calendar-header">
+            <h2 class="month-year" id="month-year">Month Year</h2>
+        </div>
+        <div class="calendar-grid" id="calendar-grid">
+            <!-- Day headers -->
+            <div class="day-header">Sun</div>
+            <div class="day-header">Mon</div>
+            <div class="day-header">Tue</div>
+            <div class="day-header">Wed</div>
+            <div class="day-header">Thu</div>
+            <div class="day-header">Fri</div>
+            <div class="day-header">Sat</div>
+            
+            <!-- Days will be inserted here by JavaScript -->
+        </div>
+        <div class="event-info" id="event-info">
+            No event selected
+        </div>
+    </div>
 
     {%endblock%}
 </body>

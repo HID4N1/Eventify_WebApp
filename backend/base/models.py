@@ -41,7 +41,8 @@ class Event(models.Model):
     main_image = models.ImageField(upload_to='event_images/', null=True, blank=True)
     
     def __str__(self):
-        return f"{self.title} - {self.organizer.username}"
+        organizer_username = self.organizer.username if self.organizer else "No Organizer"
+        return f"{self.title} - {organizer_username}"
 
 class Customer(models.Model):
     """Ticket purchasing customers"""
