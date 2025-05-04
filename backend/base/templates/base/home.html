@@ -1,0 +1,175 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventify | Next-Gen Event Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'base/css/home.css' %}">
+</head>
+<body class="bg-pattern">
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="logo-text">Eventify</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#solutions">Solutions</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+        </nav>
+        <a class="cta-button" href="{% url 'organiser_register' %}" style="text-decoration: none;">Get Started</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Transform Your Events With Intelligent Management</h1>
+            <p>Eventify is the all-in-one platform that simplifies event planning, enhances attendee engagement, and delivers actionable insights for organizers.</p>
+            <div class="hero-buttons">
+                <a class="cta-button" href="{% url 'organiser_register' %}" style="text-decoration: none;">Sign Up</a>
+                <a class="secondary-button" href="{% url 'organiser_login'%}" style="text-decoration: none;">Log In</a>
+            </div>
+            <div class="trust-badges">
+                <p>Trusted by leading organizations worldwide</p>
+                <!-- Trust badges would go here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Powerful Features</h2>
+            <p>Everything you need to create, manage, and analyze successful events</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-ticket-alt"></i>
+                </div>
+                <h3>Smart Ticketing</h3>
+                <p>Customizable ticketing with dynamic pricing, promo codes, and real-time availability tracking.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Attendee Management</h3>
+                <p>Comprehensive tools for registration, check-in, and attendee communication.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Real-time Analytics</h3>
+                <p>Powerful dashboards with actionable insights on attendance, engagement, and ROI.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile Experience</h3>
+                <p>Dedicated event apps with personalized schedules, networking, and interactive features.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3>Marketing Tools</h3>
+                <p>Built-in email campaigns, social media integration, and promotional assets.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Enterprise Security</h3>
+                <p>Bank-grade security, compliance, and data protection for your events.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-header">
+            <h2>Trusted by Event Professionals</h2>
+            <p>Hear what our customers say about Eventify</p>
+        </div>
+        <div class="testimonial-card">
+            <p class="testimonial-content">Eventify completely transformed how we manage our annual conference. The platform reduced our admin time by 60% while increasing attendee satisfaction scores. The analytics alone are worth the investment.</p>
+            <div class="testimonial-author">
+                <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson" class="author-avatar">
+                <div class="author-info">
+                    <h4>Sarah Johnson</h4>
+                    <p>Director of Events, TechSummit</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Elevate Your Events?</h2>
+        <p>Join thousands of event professionals who trust Eventify to power their most important gatherings.</p>
+        <a class="cta-button" href="{% url 'organiser_register' %}" style="text-decoration: none;">Start Your Free Trial</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Eventfiy</h3>
+                <p>The future of event management technology, designed to help you create unforgettable experiences.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Integrations</a></li>
+                    <li><a href="#">Updates</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Webinars</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Partners</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Eventify. All rights reserved.
+        </div>
+    </footer>
+
+    
+    <!-- Scripts -->
+    <script src="{%static 'base/js/home.js'%}"></script>
+</body>
+</html>

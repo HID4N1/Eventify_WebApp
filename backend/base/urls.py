@@ -4,9 +4,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.organizer_login, name='organiser_login'),
+    path('', views.home, name='home'),
     path('organiser/register/', views.organizer_register, name='organiser_register'),
     path('logout/', views.logout, name='logout'),
+    path('organiser/login/', views.organizer_login, name='organiser_login'),
     path('dashboard/', views.Dashboard, name='dashboard'),
     path('calendar/', views.calendar, name='calendar'),
     path('event/', views.event, name='event'),
