@@ -53,14 +53,11 @@
                 </a>
              </li>
              <li>
-                <form method="POST" action="#" style="margin: 0;">
-                {% csrf_token %}
-                <button type="submit" style="all: unset; cursor: pointer; display: flex; align-items: center; width: 100%; padding: 0 10px; height: 40px; color: inherit;">
-                <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i>
-                <span>Logout</span>
-                </button>
-                </form>
-                </li>            
+                <a href="{% url 'logout' %}">
+                    <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i>
+                    <span>Logout</span>
+                </a>
+            </li>            
             
         </ul>
 

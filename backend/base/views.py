@@ -4,13 +4,23 @@ from django.db.models import Q
 # Create your views here.
 from .forms import EventForm
 from django.contrib import messages
-
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
+from .forms import OrganiserRegistrationForm
+from .decorators import organizer_required
 
+from django.contrib.auth import login as auth_login 
 from .models import *
 
-
+@login_required
+@organizer_required
 def Dashboard(request):
+    """View for the dashboard"""
+    # Check if the user is authenticated and has a username attribute
+    if not request.user.is_authenticated or not hasattr(request.user, 'username'):
+        # If not, redirect to the home page
+        return redirect('login')  # Only organizers can access
     # Fetch all events from the database
     events = Event.objects.all().select_related('organizer').prefetch_related('categories')
     customers = Customer.objects.all()
@@ -31,14 +41,14 @@ def Dashboard(request):
         }
     return render(request, "base/dashboard.html", context)
 
-
+@organizer_required
 def calendar(request):
     context = {
         'page_title': 'Calendar - Eventify',
     }
     return render(request, "base/calendar.html", context)
 
-
+@organizer_required
 def event(request):
     search_query = request.GET.get('search', '')
     category_filter = request.GET.get('category', 'all')
@@ -68,7 +78,7 @@ def event(request):
     }
     return render(request, "base/events.html", context)
 
-
+@organizer_required
 def event_detail(request, pk):
     event = Event.objects.get(id=pk)
     customers = Customer.objects.filter(tickets__event=event).distinct()
@@ -81,7 +91,7 @@ def event_detail(request, pk):
     }
     return render(request, "base/event_detail.html", context)
 
-
+@organizer_required
 def create_event(request):
     form = EventForm()
     if request.method == 'POST':
@@ -106,7 +116,7 @@ def create_event(request):
 
     return render(request, "base/event_form.html", context)
 
-
+@organizer_required
 def update_event(request, pk):
     event = Event.objects.get(id=pk)
     form = EventForm(instance=event)
@@ -118,7 +128,7 @@ def update_event(request, pk):
     context = { 'form': form, 'page_title': 'Update Event - Eventify' }
     return render(request, "base/event_form.html", context)
 
-
+@organizer_required
 def delete_event(request, pk):
     event = Event.objects.get(id=pk)
     if request.method == 'POST':
@@ -129,16 +139,46 @@ def delete_event(request, pk):
      }
     return render(request, "base/delete_event.html", context)
 
-
+@organizer_required
 def finance(request):
     context = {
         'page_title': 'Finance - Eventify',
     }
     return render(request, "base/finance.html", context)
 
-
+@organizer_required
 def support(request):
     context = {
         'page_title': 'Support - Eventify',
     }
     return render(request, "base/support.html", context)
+
+
+def organizer_register(request):
+    if request.method == 'POST':
+        form = OrganiserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Do not log in the user automatically after registration
+            return redirect('login')
+    else:
+        form = OrganiserRegistrationForm()
+    return render(request, 'base/register.html', {'form': form})
+
+def organizer_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth_login(request, user)  # Correct way to call login
+            return redirect('dashboard')
+        else:
+            # Return error message
+            return render(request, 'base/login.html', {'error': 'Invalid credentials'})
+    return render(request, 'base/login.html')
+
+def logout(request):
+    """View for logout page"""
+    return render(request, 'base/login.html')
+

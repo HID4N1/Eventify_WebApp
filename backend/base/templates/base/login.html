@@ -33,26 +33,24 @@
                         {% csrf_token %}
                         
                         <!-- Form Errors -->
-                        {% if form.errors %}
+                        {% if error %}
                             <div class="form-errors">
-                                {% for error in form.non_field_errors %}
-                                    <div class="alert alert-danger">
-                                        <strong>{{ error|escape }}</strong>
-                                    </div>
-                                {% endfor %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
                             </div>
                         {% endif %}
 
                         <!-- Username/Email Field -->
                         <div class="form-group">
-                            <label for="{{ form.username.id_for_label }}">Username</label>
-                            {{ form.username }}
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" required autofocus>
                         </div>
 
                         <!-- Password Field -->
                         <div class="form-group">
-                            <label for="{{ form.password.id_for_label }}">Password</label>
-                            {{ form.password2 }}
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required>
                             <div class="password-actions">
                                 <a href="#" class="forgot-password">Forgot Password?</a>
                             </div>
@@ -63,23 +61,6 @@
                             <input type="checkbox" id="remember" name="remember">
                             <label for="remember">Remember me</label>
                         </div>
-
-                        {% if form.errors %}
-                            <div class="form-errors">
-                                {% for field in form %}
-                                    {% for error in field.errors %}
-                                        <div class="alert alert-danger">
-                                            <strong>{{ error|escape }}</strong>
-                                        </div>
-                                    {% endfor %}
-                                {% endfor %}
-                                {% for error in form.non_field_errors %}
-                                    <div class="alert alert-danger">
-                                        <strong>{{ error|escape }}</strong>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
 
                         <div class="form-footer">
                             <button type="submit" class="btn btn-primary">Sign In</button>

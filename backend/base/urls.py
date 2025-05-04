@@ -4,10 +4,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    # path('login/', views.loginPage, name='login'),
-    # path('register/', views.registerPage, name='register'),
-    # path('logout/', views.logoutUser, name='logout'),
-    path('', views.Dashboard, name='dashboard'),
+    path('', views.organizer_login, name='organiser_login'),
+    path('organiser/register/', views.organizer_register, name='organiser_register'),
+    path('logout/', views.logout, name='logout'),
+    path('dashboard/', views.Dashboard, name='dashboard'),
     path('calendar/', views.calendar, name='calendar'),
     path('event/', views.event, name='event'),
     path('finance/', views.finance, name='finance'),
@@ -20,3 +20,4 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

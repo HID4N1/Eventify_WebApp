@@ -1,8 +1,9 @@
 from django.db import models
+from django.db.models import Q
+from django.contrib.auth.models import AbstractUser
 
 
-
-class Organiser(models.Model):
+class Organiser(AbstractUser):
     """Organiser model for event organizers"""
     username = models.CharField(max_length=150, unique=True)
     password = models.CharField(max_length=128)
