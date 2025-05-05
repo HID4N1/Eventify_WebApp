@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{% static 'base/css/user_header.css' %}">
     <link rel="stylesheet" href="{% static 'base/css/support.css' %}">
     <link rel="stylesheet" href="{% static 'base/css/calendar.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/settings.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/profile.css' %}">
     <title>{% block title %}{{ page_title|default:"Eventify" }}{% endblock %}</title>
 </head>
 <body>
@@ -34,7 +36,6 @@
 
                 <div class="main-content">
                     {% block content %}
-                    {% include 'base/user_header.html' %}
      
                     {% endblock %}
                 </div>

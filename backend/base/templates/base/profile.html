@@ -1,0 +1,246 @@
+{% extends 'base/base.html'%}
+{% load static %}
+
+<html>
+<body>
+
+    {%block content%}
+    <div class="profile-container">
+        <!-- Profile Header Section -->
+        <div class="profile-header">
+            <div class="cover-photo">
+                <div class="cover-overlay"></div>
+                <button class="edit-cover-btn">
+                    <i class="fas fa-camera"></i> Edit Cover
+                </button>
+            </div>
+            
+            <div class="profile-info">
+                <div class="avatar-container">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile Picture" class="profile-avatar">
+                    <button class="edit-avatar-btn">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+                
+                <div class="profile-details">
+                    <p class="profile-name">{{user.last_name}} {{user.first_name}}</p>
+                    <p class="profile-joined"><i class="fas fa-calendar-alt"></i> Joined January 2020</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Profile Content -->
+        <div class="profile-content">
+            <!-- Left Column -->
+            <div class="profile-left">
+                <!-- About Section -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-user"></i> About</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>Creative UX designer with 8+ years of experience designing beautiful digital experiences. Passionate about user-centered design and creating intuitive interfaces.</p>
+                        
+                        <div class="about-item">
+                            <i class="fas fa-birthday-cake"></i>
+                            <div>
+                                <span class="about-label">Birthday</span>
+                                <span class="about-value">June 12, 1989</span>
+                            </div>
+                        </div>
+                        
+                        <div class="about-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <span class="about-label">Phone</span>
+                                <span class="about-value">to add mn baed</span>
+                            </div>
+                        </div>
+                        
+                        <div class="about-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <span class="about-label">Email</span>
+                                <span class="about-value">{{user.email}}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="about-item">
+                            <i class="fas fa-globe"></i>
+                            <div>
+                                <span class="about-label">Website</span>
+                                <a href="#" class="about-value">alexandrajohnson.design</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Languages Section -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-language"></i> Languages</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="language-item">
+                            <span class="language-name">English</span>
+                            <span class="language-level">Native</span>
+                        </div>
+                        
+                        <div class="language-item">
+                            <span class="language-name">Spanish</span>
+                            <span class="language-level">Fluent</span>
+                        </div>
+                        
+                        <div class="language-item">
+                            <span class="language-name">French</span>
+                            <span class="language-level">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column - Update Form -->
+            <div class="profile-right">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-user-edit"></i> Update Profile Information</h2>
+                    </div>
+                    <div class="card-body">
+                        <form class="profile-form">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" class="form-input" value="{{user.first_name}}">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" class="form-input" value="{{user.last_name}}">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" class="form-input" value="{{user.email}}" disabled>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-input" placeholder="Enter phone number">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="birthday">Birthday</label>
+                                <input type="date" id="birthday" class="form-input">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="website">Website</label>
+                                <input type="url" id="website" class="form-input" placeholder="https://example.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="bio">Bio</label>
+                                <textarea id="bio" class="form-textarea" rows="4" placeholder="Tell us about yourself...">Creative UX designer with 8+ years of experience designing beautiful digital experiences. Passionate about user-centered design and creating intuitive interfaces.</textarea>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission handling
+            const profileForm = document.querySelector('.profile-form');
+            if (profileForm) {
+                profileForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading state
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                    submitBtn.disabled = true;
+                    
+                    // Simulate API call
+                    setTimeout(() => {
+                        // Show success message
+                        submitBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
+                        submitBtn.style.backgroundColor = 'var(--success-color)';
+                        
+                        // Reset after delay
+                        setTimeout(() => {
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.style.backgroundColor = '';
+                            submitBtn.disabled = false;
+                        }, 1500);
+                    }, 1500);
+                });
+            }
+            
+            // Avatar edit button
+            const editAvatarBtn = document.querySelector('.edit-avatar-btn');
+            if (editAvatarBtn) {
+                editAvatarBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('avatar-upload').click();
+                });
+            }
+            
+            // Cover photo edit button
+            const editCoverBtn = document.querySelector('.edit-cover-btn');
+            if (editCoverBtn) {
+                editCoverBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('cover-upload').click();
+                });
+            }
+            
+            // Hidden file inputs
+            const avatarUpload = document.createElement('input');
+            avatarUpload.type = 'file';
+            avatarUpload.id = 'avatar-upload';
+            avatarUpload.style.display = 'none';
+            avatarUpload.accept = 'image/*';
+            
+            const coverUpload = document.createElement('input');
+            coverUpload.type = 'file';
+            coverUpload.id = 'cover-upload';
+            coverUpload.style.display = 'none';
+            coverUpload.accept = 'image/*';
+            
+            document.body.appendChild(avatarUpload);
+            document.body.appendChild(coverUpload);
+            
+            // Handle file selection
+            avatarUpload.addEventListener('change', function(e) {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.querySelector('.profile-avatar').src = e.target.result;
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+            
+            coverUpload.addEventListener('change', function(e) {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.querySelector('.cover-photo').style.backgroundImage = `url(${e.target.result})`;
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+    </script>
+    {%endblock%}
+</body>
+</html>

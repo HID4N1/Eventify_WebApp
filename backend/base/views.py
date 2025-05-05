@@ -10,6 +10,9 @@ from .decorators import organizer_required
 
 from .models import *
 
+def home(request):
+        return render(request, 'base/home.html', {'page_title': 'Home - Eventify'})
+
 @organizer_required
 def Dashboard(request):
     """View for the dashboard"""
@@ -101,7 +104,6 @@ def create_event(request):
         'form': form,
         'page_title': 'Create Event - Eventify',
     }
-    return render(request, "base/event_form.html", context)
 
 @organizer_required
 def update_event(request, pk):
@@ -141,6 +143,20 @@ def support(request):
     }
     return render(request, "base/support.html", context)
 
+@organizer_required
+def settings(request):
+    context = {
+        'page_title': 'Settings - Eventify',
+    }
+    return render(request, "base/settings.html", context)
+
+@organizer_required
+def profile(request):
+    context = {
+        'page_title': 'Profile - Eventify',
+    }
+    return render(request, "base/profile.html", context)
+
 def organizer_register(request):
     """View for organizer registration"""
     if request.method == 'POST':
@@ -173,5 +189,3 @@ def logout(request):
         return redirect('home')
     return render(request, 'base/home.html')
 
-def home(request):
-        return render(request, 'base/home.html', {'page_title': 'Home - Eventify'})

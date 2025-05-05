@@ -1,0 +1,406 @@
+{% extends 'base/base.html'%}
+{% load static %}
+
+<html>
+<body>
+
+    {%block content%}
+    <div class="settings-container">
+        <div class="settings-header">
+            <h1>Settings</h1>
+            <p>Manage your account preferences and application settings</p>
+        </div>
+        
+        <div class="settings-content">
+            <div class="settings-sidebar">
+                <div class="settings-sidebar-item active" data-tab="general">General</div>
+                <div class="settings-sidebar-item" data-tab="notifications">Notifications</div>
+                <div class="settings-sidebar-item" data-tab="privacy">Privacy</div>
+                <div class="settings-sidebar-item" data-tab="appearance">Appearance</div>
+            </div>
+            
+            <div class="settings-main">
+                <!-- General Tab -->
+                <div class="settings-tab active" id="general-tab">
+                    <div class="settings-section">
+                        <h2>General Settings</h2>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Language</h3>
+                                <p>Choose your preferred language</p>
+                            </div>
+                            <div class="setting-control">
+                                <select>
+                                    <option>English</option>
+                                    <option>Spanish</option>
+                                    <option>French</option>
+                                    <option>German</option>
+                                    <option>Japanese</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Timezone</h3>
+                                <p>Set your local timezone</p>
+                            </div>
+                            <div class="setting-control">
+                                <select>
+                                    <option>(UTC-12:00) International Date Line West</option>
+                                    <option>(UTC-08:00) Pacific Time (US & Canada)</option>
+                                    <option selected>(UTC-05:00) Eastern Time (US & Canada)</option>
+                                    <option>(UTC+00:00) Greenwich Mean Time</option>
+                                    <option>(UTC+01:00) Central European Time</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Auto-save</h3>
+                                <p>Automatically save changes</p>
+                            </div>
+                            <div class="setting-control">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h2>Data & Storage</h2>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Cache Size</h3>
+                                <p>Currently using 245 MB</p>
+                            </div>
+                            <div class="setting-control">
+                                <button class="btn btn-primary">Clear Cache</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Backup Settings</h3>
+                                <p>Last backup: 3 days ago</p>
+                            </div>
+                            <div class="setting-control">
+                                <button class="btn btn-primary">Backup Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notifications Tab -->
+                <div class="settings-tab" id="notifications-tab">
+                    <div class="settings-section">
+                        <h2>Notification Preferences</h2>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Email Notifications</h3>
+                                <p>Receive notifications via email</p>
+                            </div>
+                            <div class="setting-control">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Push Notifications</h3>
+                                <p>Receive notifications on your device</p>
+                            </div>
+                            <div class="setting-control">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Notification Sound</h3>
+                                <p>Play sound for new notifications</p>
+                            </div>
+                            <div class="setting-control">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h2>Notification Types</h2>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>System Messages</h3>
+                                <p>Important updates and announcements</p>
+                            </div>
+                            <div class="setting-control">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Friend Requests</h3>
+                                <p>When someone sends you a friend request</p>
+                            </div>
+                            <div class="setting-control">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Message Alerts</h3>
+                                <p>When you receive new messages</p>
+                            </div>
+                            <div class="setting-control">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Privacy Tab -->
+                <div class="settings-tab" id="privacy-tab">
+                    <div class="settings-section">
+                        <h2>Privacy Settings</h2>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Profile Visibility</h3>
+                                <p>Who can see your profile</p>
+                            </div>
+                            <div class="setting-control">
+                                <select>
+                                    <option>Public</option>
+                                    <option selected>Friends Only</option>
+                                    <option>Private</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Activity Status</h3>
+                                <p>Show when you're active</p>
+                            </div>
+                            <div class="setting-control">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Data Collection</h3>
+                                <p>Allow anonymous usage data collection</p>
+                            </div>
+                            <div class="setting-control">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h2>Blocked Users</h2>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Blocked Accounts</h3>
+                                <p>3 users blocked</p>
+                            </div>
+                            <div class="setting-control">
+                                <button class="btn btn-primary">Manage Blocked Users</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Appearance Tab -->
+                <div class="settings-tab" id="appearance-tab">
+                    <div class="settings-section">
+                        <h2>Display Options</h2>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Dark Mode</h3>
+                                <p>Switch between light and dark theme</p>
+                            </div>
+                            <div class="setting-control">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Font Size</h3>
+                                <p>Adjust the application font size</p>
+                            </div>
+                            <div class="setting-control">
+                                <select>
+                                    <option>Small</option>
+                                    <option selected>Medium</option>
+                                    <option>Large</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Density</h3>
+                                <p>Control the spacing of UI elements</p>
+                            </div>
+                            <div class="setting-control">
+                                <select>
+                                    <option>Compact</option>
+                                    <option selected>Normal</option>
+                                    <option>Comfortable</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h2>Theme Customization</h2>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Primary Color</h3>
+                                <p>Choose your main accent color</p>
+                            </div>
+                            <div class="setting-control">
+                                <input type="color" value="#4285f4">
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Background</h3>
+                                <p>Select your preferred background</p>
+                            </div>
+                            <div class="setting-control">
+                                <select>
+                                    <option>Default</option>
+                                    <option>Light</option>
+                                    <option>Dark</option>
+                                    <option>Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const sidebarItems = document.querySelectorAll('.settings-sidebar-item');
+            const tabs = document.querySelectorAll('.settings-tab');
+            
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all sidebar items
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // Hide all tabs
+                    tabs.forEach(tab => tab.classList.remove('active'));
+                    
+                    // Show the corresponding tab
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Toggle switches functionality
+            document.querySelectorAll('.switch input').forEach(switchInput => {
+                switchInput.addEventListener('change', function() {
+                    const settingName = this.closest('.setting-item').querySelector('h3').textContent;
+                    console.log(`${settingName} ${this.checked ? 'enabled' : 'disabled'}`);
+                    
+                //    saveSetting(settingName, this.checked);
+                });
+            });
+            
+            // Select dropdowns functionality
+            document.querySelectorAll('.setting-control select').forEach(select => {
+                select.addEventListener('change', function() {
+                    const settingName = this.closest('.setting-item').querySelector('h3').textContent;
+                    console.log(`${settingName} changed to ${this.value}`);
+                    
+                    // In a real application, you would save this setting to the server here
+                    // Example: saveSetting(settingName, this.value);
+                });
+            });
+            
+            // Button click handlers
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.textContent.trim();
+                    const settingItem = this.closest('.setting-item');
+                    const settingName = settingItem ? settingItem.querySelector('h3').textContent : 'Unknown';
+                    
+                    console.log(`${action} button clicked for ${settingName}`);
+                    
+                    // In a real application, you would perform the action here
+                    // Example: if (action === 'Clear Cache') clearCache();
+                    
+                    // Show a temporary success message for demo purposes
+                    if (this.classList.contains('btn-primary') || this.classList.contains('btn-danger')) {
+                        const originalText = this.textContent;
+                        this.textContent = 'Processing...';
+                        this.disabled = true;
+                        
+                        setTimeout(() => {
+                            this.textContent = 'Done!';
+                            setTimeout(() => {
+                                this.textContent = originalText;
+                                this.disabled = false;
+                            }, 1000);
+                        }, 800);
+                    }
+                });
+            });
+        });
+    </script>
+    {%endblock%}
+</body>
+</html>

@@ -17,6 +17,8 @@ urlpatterns = [
     path('create_event/', views.create_event, name='create-event'),
     path('update_event/<str:pk>/', views.update_event, name='update-event'),
     path('delete_event/<str:pk>/', views.delete_event, name='delete-event'),
+    path('settings/', views.settings, name='settings'),
+    path('profile/', views.profile, name='profile'),
 ]
 
 if settings.DEBUG:
