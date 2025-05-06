@@ -1,12 +1,76 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-<html>
-<body>
-    {%block content%}
+{% block content %}
 
-    <h1>finance</h1>
-    
-    {%endblock%}
-</body>
-</html>
+<div class="finance-container">
+    <section class="subscription-plans">
+        <h2>Subscription Plans</h2>
+        <div class="plans">
+            <div class="plan">
+                <h3>Basic Plan</h3>
+                <p class="plan-description">
+                    Ideal for individuals starting out with basic features.
+                    <br>Includes access to basic features and support.
+                    <br>lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <br>Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+                </p>
+                <p>$10/month</p>
+                <button>Choose Plan</button>
+            </div>
+            <div class="plan current-plan">
+                <h3>Standard Plan</h3>
+                <p class="plan-description">
+                    Perfect for regular users with additional benefits.
+                    <br>Includes access to all features and priority support.
+                    <br>lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <br>Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+
+                </p>
+                <p>$20/month</p>
+                <button disabled>Current Plan</button>
+            </div>
+            <div class="plan">
+                <h3>Premium Plan</h3>
+                <p class="plan-description">
+                    Best for professionals needing full access and priority support.
+                    <br>Includes access to all features, priority support, and exclusive content.
+                    <br>lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <br>Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+                    
+                </p>
+                <p>$30/month</p>
+                <button>Choose Plan</button>
+            </div>
+        </div>
+        <button class="stop-subscription">Stop Monthly Subscription</button>
+    </section>
+
+    <section class="card-info">
+        <h2>Card Info</h2>
+        <p>Your credit/debit card details and transactions summary.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Card Type</th>
+                    <th>Card Number</th>
+                    <th>Expiry Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Visa</td>
+                    <td>**** **** **** 1234</td>
+                    <td>12/25</td>
+                    <td>
+                        <button class="change-card">Change</button>
+                        <button class="delete-card">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+{% endblock %}

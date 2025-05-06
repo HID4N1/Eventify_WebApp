@@ -38,13 +38,6 @@ def Dashboard(request):
     return render(request, "base/dashboard.html", context)
 
 @organizer_required
-def calendar(request):
-    context = {
-        'page_title': 'Calendar - Eventify',
-    }
-    return render(request, "base/calendar.html", context)
-
-@organizer_required
 def event(request):
     search_query = request.GET.get('search', '')
     category_filter = request.GET.get('category', 'all')

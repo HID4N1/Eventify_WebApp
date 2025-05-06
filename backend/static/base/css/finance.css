@@ -1,0 +1,141 @@
+.finance-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+}
+
+.finance-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.finance-container section {
+    margin-bottom: 30px;
+}
+
+.finance-container h2 {
+    color: #555;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.finance-container p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.finance-container ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    color: #444;
+}
+
+.finance-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.finance-container table th,
+.finance-container table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.finance-container table th {
+    background-color: #eee;
+    color: #333;
+}
+
+.subscription-plans {
+    border-radius: 8px;
+    width: 900px;
+}
+
+.plans {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 2rem;
+}
+
+.plan {
+    background: linear-gradient(to right, #000428, #35014f);
+    border-radius: 8px;
+    padding: 15px;
+    width: 40%;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.8);
+    text-align: center;
+}
+
+.plan h3 {
+    margin-top: 0;
+    color: #ffffff;
+}
+
+.plan p {
+    font-size: 18px;
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+.plan .plan-description {
+    font-size: 14px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.plan button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.plan button:disabled,
+.plan.current-plan button {
+    background-color: #6c757d;
+    cursor: default;
+}
+
+.plan.current-plan {
+    border-color: #007bff;
+    box-shadow: 0 0 10px #007bff;
+}
+
+.stop-subscription {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 0 auto;
+}
+
+.change-card,
+.delete-card {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.delete-card {
+    background-color: #dc3545;
+}
