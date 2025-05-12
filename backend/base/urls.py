@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import *
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -18,8 +19,12 @@ urlpatterns = [
     path('delete_event/<str:pk>/', views.delete_event, name='delete-event'),
     path('settings/', views.settings, name='settings'),
     path('profile/', views.profile, name='profile'),
+
 ]
 
+from django.conf import settings
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
 

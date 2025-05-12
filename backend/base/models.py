@@ -10,6 +10,27 @@ class Organiser(AbstractUser):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    phone = models.CharField(max_length=15, null=True, blank=True)
+    date_joined = models.DateTimeField(auto_now_add=True, null=True)
+    date_updated = models.DateTimeField(auto_now=True, null=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
+    organiser_website = models.URLField(null=True, blank=True)
+    organiser_birthday = models.DateField(null=True, blank=True)
+    organiser_location = models.CharField(max_length=100, null=True, blank=True)
+    organiser_bio = models.TextField(null=True, blank=True)
+    
+    def is_profile_complete(self):
+        required_fields = [
+            self.first_name,
+            self.last_name,
+            self.phone,
+            self.profile_picture,
+            self.organiser_website,
+            self.organiser_birthday,
+            self.organiser_location,
+            self.organiser_bio,
+        ]
+        return all(required_fields)
     
     def __str__(self):
         return self.username

@@ -4,7 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import gettext_lazy as _
 from .models import Event, Organiser
 
-
 class EventForm(ModelForm):
     date = SplitDateTimeField(
         widget=SplitDateTimeWidget(
@@ -23,8 +22,6 @@ class EventForm(ModelForm):
             ),
         }
 
-  
-
 class OrganiserRegistrationForm(UserCreationForm):
     """Form for organizer sign up"""
 
@@ -33,10 +30,26 @@ class OrganiserRegistrationForm(UserCreationForm):
         fields = [
             'first_name',
             'last_name',
-            'username', 
+            'username',
             'email', 
             'password1', 
             'password2', 
-        
-            
         ]
+
+class OrganiserProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Organiser
+        fields = [
+            'first_name',
+            'last_name',
+            'phone',
+            'profile_picture',
+            'organiser_website',
+            'organiser_birthday',
+            'organiser_location',
+            'organiser_bio',
+        ]
+        widgets = {
+            'organiser_birthday': forms.DateInput(attrs={'type': 'date'}),
+            'organiser_bio': forms.Textarea(attrs={'rows': 4}),
+        }

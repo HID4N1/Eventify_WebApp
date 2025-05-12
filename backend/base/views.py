@@ -143,10 +143,23 @@ def settings(request):
     }
     return render(request, "base/settings.html", context)
 
+from .forms import EventForm, OrganiserRegistrationForm, OrganiserProfileUpdateForm
+
 @organizer_required
 def profile(request):
+    if request.method == 'POST':
+        form = OrganiserProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully!')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = OrganiserProfileUpdateForm(instance=request.user)
     context = {
         'page_title': 'Profile - Eventify',
+        'form': form,
     }
     return render(request, "base/profile.html", context)
 
