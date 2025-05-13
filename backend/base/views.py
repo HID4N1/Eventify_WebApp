@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import Q
 from django.contrib import messages
-from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
+from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
-from .forms import EventForm, OrganiserRegistrationForm
+from django.contrib.auth.forms import PasswordChangeForm
+from .forms import EventForm, OrganiserRegistrationForm, UserSettingsForm, OrganiserProfileUpdateForm
 from .decorators import organizer_required
 
 from .models import *
@@ -98,6 +99,8 @@ def create_event(request):
         'page_title': 'Create Event - Eventify',
     }
 
+    return render(request, "base/event_form.html", context)
+
 @organizer_required
 def update_event(request, pk):
     event = Event.objects.get(id=pk)
@@ -138,12 +141,41 @@ def support(request):
 
 @organizer_required
 def settings(request):
+    user = request.user
+    active_tab = request.GET.get('tab', 'general')
+    if request.method == 'POST':
+        if 'update_settings' in request.POST:
+            user_settings_form = UserSettingsForm(request.POST, instance=user)
+            if user_settings_form.is_valid():
+                user_settings_form.save()
+                messages.success(request, 'Settings updated successfully.')
+                return redirect('/settings/?tab=general')
+            else:
+                messages.error(request, 'Please correct the errors in the settings form.')
+            password_form = PasswordChangeForm(user)
+        elif 'change_password' in request.POST:
+            password_form = PasswordChangeForm(user, request.POST)
+            if password_form.is_valid():
+                user = password_form.save()
+                update_session_auth_hash(request, user)  # Important to keep the user logged in
+                messages.success(request, 'Password updated successfully.')
+                return redirect('/settings/?tab=privacy')
+            else:
+                messages.error(request, 'Please correct the errors in the password form.')
+            user_settings_form = UserSettingsForm(instance=user)
+    else:
+        user_settings_form = UserSettingsForm(instance=user)
+        password_form = PasswordChangeForm(user)
+
     context = {
         'page_title': 'Settings - Eventify',
+        'active_tab': active_tab,
+        'user_settings_form': user_settings_form,
+        'password_form': password_form,
     }
     return render(request, "base/settings.html", context)
 
-from .forms import EventForm, OrganiserRegistrationForm, OrganiserProfileUpdateForm
+from .forms import EventForm, OrganiserRegistrationForm, UserSettingsForm
 
 @organizer_required
 def profile(request):
@@ -195,3 +227,67 @@ def logout(request):
         return redirect('home')
     return render(request, 'base/home.html')
 
+
+from django.shortcuts import render, redirect
+from django.utils import timezone
+from django.db.models import Count, Q
+from django.contrib.auth.decorators import login_required
+from .models import Event
+from datetime import datetime, timedelta
+
+@organizer_required
+def analytics(request):
+    """View for analytics dashboard"""
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    # Get date range from request or use default (last 30 days)
+    date_range = request.GET.get('range', '30d')
+    end_date = timezone.now()
+    
+    if date_range == '7d':
+        start_date = end_date - timedelta(days=7)
+    elif date_range == '30d':
+        start_date = end_date - timedelta(days=30)
+    elif date_range == '90d':
+        start_date = end_date - timedelta(days=90)
+    elif date_range == '12m':
+        start_date = end_date - timedelta(days=365)
+    else:
+        start_date = end_date - timedelta(days=30)
+
+    # Event status breakdown
+    status_data = (
+        Event.objects.filter(organizer=request.user)
+        .values('status')
+        .annotate(count=Count('status'))
+        .order_by('status')
+    )
+
+    # Performance over time (events created)
+    performance_data = []
+    current_date = start_date
+    
+    while current_date <= end_date:
+        day_events = Event.objects.filter(
+            organizer=request.user,
+            created_at__date=current_date
+        ).count()
+        
+        performance_data.append({
+            'date': current_date.strftime('%Y-%m-%d'),
+            'events': day_events,
+        })
+        
+        current_date += timedelta(days=1)
+
+    context = {
+        'page_title': 'Analytics - Eventify',
+        'status_data': list(status_data),
+        'performance_data': performance_data,
+        'date_range': date_range,
+        'start_date': start_date.strftime('%Y-%m-%d'),
+        'end_date': end_date.strftime('%Y-%m-%d'),
+    }
+    
+    return render(request, 'base/analytics.html', context)

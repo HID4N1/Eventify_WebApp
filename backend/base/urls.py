@@ -19,6 +19,7 @@ urlpatterns = [
     path('delete_event/<str:pk>/', views.delete_event, name='delete-event'),
     path('settings/', views.settings, name='settings'),
     path('profile/', views.profile, name='profile'),
+    path('analytics/', views.analytics, name='analytics'),
 
 ]
 

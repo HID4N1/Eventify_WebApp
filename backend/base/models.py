@@ -18,7 +18,23 @@ class Organiser(AbstractUser):
     organiser_birthday = models.DateField(null=True, blank=True)
     organiser_location = models.CharField(max_length=100, null=True, blank=True)
     organiser_bio = models.TextField(null=True, blank=True)
-    
+
+    LANGUAGE_CHOICES = [
+        ('en', 'English'),
+        ('es', 'Spanish'),
+        ('fr', 'French'),
+        ('de', 'German'),
+        ('it', 'Italian'),
+        ('pt', 'Portuguese'),
+        ('ru', 'Russian'),
+        ('zh', 'Chinese'),
+        ('ja', 'Japanese'),
+        ('ko', 'Korean'),
+        ('ar', 'Arabic'),
+    ]
+    language = models.CharField(max_length=2, choices=LANGUAGE_CHOICES, default='en')
+    primary_color = models.CharField(max_length=7, default='#4285f4')  # Hex color code
+
     def is_profile_complete(self):
         required_fields = [
             self.first_name,

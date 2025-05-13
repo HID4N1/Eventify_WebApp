@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm, SplitDateTimeWidget, SplitDateTimeField
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.utils.translation import gettext_lazy as _
 from .models import Event, Organiser
 
@@ -52,4 +52,13 @@ class OrganiserProfileUpdateForm(forms.ModelForm):
         widgets = {
             'organiser_birthday': forms.DateInput(attrs={'type': 'date'}),
             'organiser_bio': forms.Textarea(attrs={'rows': 4}),
+        }
+
+class UserSettingsForm(forms.ModelForm):
+    class Meta:
+        model = Organiser
+        fields = ['language', 'primary_color']
+        widgets = {
+            'language': forms.Select(attrs={'class': 'form-control'}),
+            'primary_color': forms.TextInput(attrs={'type': 'color', 'class': 'form-control'}),
         }

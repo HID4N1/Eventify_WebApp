@@ -6,41 +6,48 @@
 
     {%block content%}
     <div class="settings-container">
+        
+        {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
         <div class="settings-header">
-            <h1>Settings</h1>
-            <p>Manage your account preferences and application settings</p>
         </div>
         
         <div class="settings-content">
             <div class="settings-sidebar">
-                <div class="settings-sidebar-item active" data-tab="general">General</div>
-                <div class="settings-sidebar-item" data-tab="notifications">Notifications</div>
-                <div class="settings-sidebar-item" data-tab="privacy">Privacy</div>
-                <div class="settings-sidebar-item" data-tab="appearance">Appearance</div>
+                <a href="?tab=general" class="settings-sidebar-item {% if active_tab == 'general' %}active{% endif %}">General</a>
+                <a href="?tab=notifications" class="settings-sidebar-item {% if active_tab == 'notifications' %}active{% endif %}">Notifications</a>
+                <a href="?tab=privacy" class="settings-sidebar-item {% if active_tab == 'privacy' %}active{% endif %}">Privacy</a>
+                <a href="?tab=appearance" class="settings-sidebar-item {% if active_tab == 'appearance' %}active{% endif %}">Appearance</a>
             </div>
             
             <div class="settings-main">
                 <!-- General Tab -->
-                <div class="settings-tab active" id="general-tab">
-                    <div class="settings-section">
-                        <h2>General Settings</h2>
-                        
-                        <div class="setting-item">
-                            <div class="setting-info">
-                                <h3>Language</h3>
-                                <p>Choose your preferred language</p>
-                            </div>
-                            <div class="setting-control">
-                                <select>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                    <option>French</option>
-                                    <option>German</option>
-                                    <option>Japanese</option>
-                                </select>
+                <div class="settings-tab {% if active_tab == 'general' %}active{% endif %}" id="general-tab">
+                    <form method="post" action="{% url 'settings' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="update_settings" value="1">
+                        <div class="settings-section">
+                            <h2>General Settings</h2>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h3>Language</h3>
+                                    <p>Choose your preferred language</p>
+                                </div>
+                                <div class="setting-control">
+                                    {{ user_settings_form.language }}
+                                </div>
                             </div>
                         </div>
-                        
+
                         <div class="setting-item">
                             <div class="setting-info">
                                 <h3>Timezone</h3>
@@ -70,34 +77,9 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="settings-section">
-                        <h2>Data & Storage</h2>
-                        
-                        <div class="setting-item">
-                            <div class="setting-info">
-                                <h3>Cache Size</h3>
-                                <p>Currently using 245 MB</p>
-                            </div>
-                            <div class="setting-control">
-                                <button class="btn btn-primary">Clear Cache</button>
-                            </div>
-                        </div>
-                        
-                        <div class="setting-item">
-                            <div class="setting-info">
-                                <h3>Backup Settings</h3>
-                                <p>Last backup: 3 days ago</p>
-                            </div>
-                            <div class="setting-control">
-                                <button class="btn btn-primary">Backup Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+
                 <!-- Notifications Tab -->
-                <div class="settings-tab" id="notifications-tab">
+                <div class="settings-tab {% if active_tab == 'notifications' %}active{% endif %}" id="notifications-tab">
                     <div class="settings-section">
                         <h2>Notification Preferences</h2>
                         
@@ -186,7 +168,7 @@
                 </div>
                 
                 <!-- Privacy Tab -->
-                <div class="settings-tab" id="privacy-tab">
+                <div class="settings-tab {% if active_tab == 'privacy' %}active{% endif %}" id="privacy-tab">
                     <div class="settings-section">
                         <h2>Privacy Settings</h2>
                         
@@ -230,24 +212,52 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="settings-section">
-                        <h2>Blocked Users</h2>
-                        
-                        <div class="setting-item">
-                            <div class="setting-info">
-                                <h3>Blocked Accounts</h3>
-                                <p>3 users blocked</p>
+                        <h2>Security Settings</h2>
+                        <form method="post" action="{% url 'settings' %}" class="security-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="change_password" value="1">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h3>Change Password</h3>
+                                    <p>Update your account password for enhanced security</p>
+                                </div>
+                                <div class="setting-control">
+                                    <div class="form-group">
+                                        <input type="password" name="old_password" class="text-input" 
+                                               placeholder="Current Password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="new_password1" class="text-input" 
+                                               placeholder="New Password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="new_password2" class="text-input" 
+                                               placeholder="Confirm New Password" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <span class="btn-text">Update Password</span>
+                                    </button>
+                                    
+                                    <!-- Error messages -->
+                                    {% if password_form.errors %}
+                                    <div class="alert alert-danger mt-3">
+                                        {% for field, errors in password_form.errors.items %}
+                                            {% for error in errors %}
+                                                <p class="error-message">{{ error }}</p>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
                             </div>
-                            <div class="setting-control">
-                                <button class="btn btn-primary">Manage Blocked Users</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 
                 <!-- Appearance Tab -->
-                <div class="settings-tab" id="appearance-tab">
+                <div  class="settings-tab {% if active_tab == 'appearance' %}active{% endif %}" id="appearance-tab">
                     <div class="settings-section">
                         <h2>Display Options</h2>
                         
@@ -328,35 +338,12 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Tab switching functionality
-            const sidebarItems = document.querySelectorAll('.settings-sidebar-item');
-            const tabs = document.querySelectorAll('.settings-tab');
-            
-            sidebarItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    // Remove active class from all sidebar items
-                    sidebarItems.forEach(i => i.classList.remove('active'));
-                    
-                    // Add active class to clicked item
-                    this.classList.add('active');
-                    
-                    // Hide all tabs
-                    tabs.forEach(tab => tab.classList.remove('active'));
-                    
-                    // Show the corresponding tab
-                    const tabId = this.getAttribute('data-tab') + '-tab';
-                    document.getElementById(tabId).classList.add('active');
-                });
-            });
-            
+            document.addEventListener('DOMContentLoaded', function() {
             // Toggle switches functionality
             document.querySelectorAll('.switch input').forEach(switchInput => {
                 switchInput.addEventListener('change', function() {
                     const settingName = this.closest('.setting-item').querySelector('h3').textContent;
                     console.log(`${settingName} ${this.checked ? 'enabled' : 'disabled'}`);
-                    
-                //    saveSetting(settingName, this.checked);
                 });
             });
             
@@ -365,23 +352,17 @@
                 select.addEventListener('change', function() {
                     const settingName = this.closest('.setting-item').querySelector('h3').textContent;
                     console.log(`${settingName} changed to ${this.value}`);
-                    
-                    // In a real application, you would save this setting to the server here
-                    // Example: saveSetting(settingName, this.value);
                 });
             });
             
-            // Button click handlers
-            document.querySelectorAll('.btn').forEach(button => {
+            // Button click handlers (for non-form buttons)
+            document.querySelectorAll('.btn:not([type="submit"])').forEach(button => {
                 button.addEventListener('click', function() {
                     const action = this.textContent.trim();
                     const settingItem = this.closest('.setting-item');
                     const settingName = settingItem ? settingItem.querySelector('h3').textContent : 'Unknown';
                     
                     console.log(`${action} button clicked for ${settingName}`);
-                    
-                    // In a real application, you would perform the action here
-                    // Example: if (action === 'Clear Cache') clearCache();
                     
                     // Show a temporary success message for demo purposes
                     if (this.classList.contains('btn-primary') || this.classList.contains('btn-danger')) {
